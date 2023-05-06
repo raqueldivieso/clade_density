@@ -352,7 +352,7 @@ essimCh <- read.csv("essimChi_100.csv")
 essimDi <- read.csv("essimDip_100.csv")
 essimPr <- read.csv("essimPri_100.csv")
 
-pdf("Figure_4.pdf", width = 9, height = 6)
+pdf("Figure_5.pdf", width = 9, height = 6)
 layout(matrix(1:8, ncol = 4, byrow = TRUE))
 col1 <- rgb(70/255, 190/255, 173/255)
 hist(essimAg$rho, breaks = 16, xlim = c(-0.5,0.5), col = col1, border = NA, 
@@ -371,4 +371,34 @@ hist(essimDi$rho, breaks = 5, xlim = c(-0.5,0.5), col = col1, border = NA,
      main = "Diprotodontia", xlab = expression(rho))
 hist(essimPr$rho, breaks = 4, xlim = c(-0.5,0.5), col = col1, border = NA, 
      main = "Primates", xlab = expression(rho))
+dev.off()
+
+esAn <- esCe <- esCh <- esDi <- esPr <- esSc <- esGe <- esIg <- list()
+for (i in 1:100) {
+	esMa <- compute_es(trMa[[i]])
+	esCe[[i]] <- esMa[names(esMa) %in% rownames(overCe)]
+	esCh[[i]] <- esMa[names(esMa) %in% rownames(overCh)]
+	esDi[[i]] <- esMa[names(esMa) %in% rownames(overDi)]
+	esPr[[i]] <- esMa[names(esMa) %in% rownames(overPr)]
+	
+	esSq <- compute_es(trSq[[i]])
+	esAn[[i]] <- esSq[names(esSq) %in% rownames(overAn)]
+	esSc[[i]] <- esSq[names(esSq) %in% rownames(overSc)]
+	esGe[[i]] <- esSq[names(esSq) %in% rownames(overGe)]
+	esIg[[i]] <- esSq[names(esSq) %in% rownames(overIg)]
+}
+
+pdf("figures/Figure_S1.pdf", width = 11, height = 9)
+
+par(mar = c(4,8,4,2))
+vioplot(do.call(c, esAn), 
+        do.call(c, esGe), 
+        do.call(c, esIg), 
+        do.call(c, esSc), 
+        do.call(c, esCe), 
+        do.call(c, esCh), 
+        do.call(c, esDi), 
+        do.call(c, esPr), 
+        col=rgb(0.2, 0.5, 1, 0.7), border = NA, names=c("Anguimorpha", "Gekkota", "Iguania", "Scincoidea", "Certartiodactyla", "Chiroptera", "Diprotodontia", "Primates"), horizontal=TRUE, xlab="Frequency", las=2)
+
 dev.off()
