@@ -22,7 +22,7 @@ ch[is.na(ch)] <- 0
 di[is.na(di)] <- 0
 pr[is.na(pr)] <- 0
 
-pdf("../figs/Figure_1.pdf", width=9, height=6)
+pdf("../figs/Figure_2.pdf", width=9, height=6)
 layout(matrix(1:8, ncol=4, byrow=TRUE))
 cols<-viridis(3, alpha=0.5)
 
