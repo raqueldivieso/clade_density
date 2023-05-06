@@ -1,4 +1,4 @@
-setwd("C:/Users/raque/OneDrive - ufpr.br/¡rea de Trabalho/clade_density/clade_density/data")
+setwd("C:/Users/raque/OneDrive - ufpr.br/√Årea de Trabalho/clade_density/clade_density/data")
 source("../scripts/findSisterOver.R")
 library(phytools)
 
@@ -15,15 +15,17 @@ pr<-as.matrix(read.csv("density/cladeDensityStatsPri_100.csv"))[,1]
 
 
 pdf("../figs/Figure_3.pdf", width=9, height=6)
-layout(matrix(1:8, ncol=4, byrow=TRUE))
-hist(an, breaks=seq(0, 130000, 6500), main="Anguimorpha", xlab="Clade density", lty="blank", col="red")
-hist(ge, breaks=seq(0, 130000, 6500), main="Gekkota", xlab="Clade density", lty="blank", col="red")
-hist(ig, breaks=seq(0, 130000, 6500), main="Iguania", xlab="Clade density", lty="blank", col="red")
-hist(sc, breaks=seq(0, 130000, 6500), main="Scincoidea", xlab="Clade density", lty="blank", col="red")
-hist(ce, breaks=seq(0, 130000, 6500), main="Cetartiodactyla", xlab="Clade density", lty="blank", col="red")
-hist(ch, breaks=seq(0, 130000, 6500), main="Chiroptera", xlab="Clade density", lty="blank", col="red")
-hist(di, breaks=seq(0, 130000, 6500), main="Diprotodontia", xlab="Clade density", lty="blank", col="red")
-hist(pr, breaks=seq(0, 130000, 6500), main="Primates", xlab="Clade density", lty="blank", col="red")
+vioplot(an,
+        ge,
+        ig,
+        sc,
+        ce,
+        ch,
+        di,
+        pr,
+        col="red", names=c("Anguimorpha", "Gekkota", "Iguania", "Scincoidea", "Certartiodactyla", "Chiroptera", "Diprotodontia", "Primates"), 
+	horizontal=TRUE, xlab="Frequency", las=2)
+
 
 mean(an)
 mean(ge)
@@ -87,8 +89,6 @@ densSis <- function(tree, over, dens) {
 	final
 }
 
-pdf("../figs/Figure_4.pdf", width=9, height=6)
-layout(matrix(1:8, ncol=4, byrow=TRUE))
 hist(densSis(trAngu, Oan, an), main="Anguimorpha", xlab="Difference in clade density", lty="blank", col="red")
 hist(densSis(trGekk, Oge, ge), main="Gekkota", xlab="Difference in clade density", lty="blank", col="red")
 hist(densSis(trIgua, Oig, ig), main="Iguania", xlab="Difference in clade density", lty="blank", col="red")
@@ -97,4 +97,3 @@ hist(densSis(trCeta, Oce, ce), main="Cetartiodactyla", xlab="Difference in clade
 hist(densSis(trChir, Och, ch), main="Chiroptera", xlab="Difference in clade density", lty="blank", col="red")
 hist(densSis(trDipr, Odi, di), main="Diprotodontia", xlab="Difference in clade density", lty="blank", col="red")
 hist(densSis(trPrim, Opr, pr), main="Primates", xlab="Difference in clade density", lty="blank", col="red")
-dev.off()
