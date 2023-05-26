@@ -1,6 +1,6 @@
 #### Calculate matrix of range overlaping between species of  Chiroptera 
-### This same data Carnivora, Cetartiodactyla, Diprotodontia, Primates, and squamates (Anguimorpha, Gekkota, Iguania, Lacertoidea, Scincoidea and Serpentes.
-### Geographical distributions polygons were obtained from available data on The IUCN Red List of Threatened Species database Version 2018-2.
+### The same was done for Carnivora, Cetartiodactyla, Diprotodontia, Primates, and squamates (Anguimorpha, Gekkota, Iguania, Lacertoidea and Scincoidea.
+### Geographical distributions polygons were obtained from available data on The IUCN Red List of Threatened Species database Version 2018-2 and .
 
 setwd("C:/Users/raque/OneDrive - ufpr.br/Projetos_Paralelos/Range_overlap")
 
@@ -17,7 +17,7 @@ library(bigmemory)
 
 #open the IUCN shapefile for all chirop species
 sha<-readOGR("shapefiles/Chiroptera/data_0.shp")
-invisible(spTransform(sha, CRS=CRS("+proj=cea +lat_ts=0 +lon_0=0 +x_0=0 +y_0=0 +datum=WGS84 +units=m +no_defs"))) #world cylindrical equal area reprojection #898spp
+invisible(spTransform(sha, CRS=CRS("+proj=aea +lat_1=29.5 +lat_2=45.5 +lat_0=23 +lon_0=-96 +x_0=0 +y_0=0 +datum=NAD83 +units=m +no_defs"))) #world cylindrical equal area reprojection #898spp
 length(sha$BINOMIAL)
 
 #removing the shape features classified as uncertain or introduced:
